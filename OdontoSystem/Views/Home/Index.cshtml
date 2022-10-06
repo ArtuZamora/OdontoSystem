@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido</h1>
+    <p>Administra óptimamente tu flota</p>
+</div>
+
+ @section Scripts {
+    <environment names="Development,Staging,Production">
+        @if (TempData["ResultFlag"] != null)
+        {
+            <script>
+                Swal.fire("@Html.Raw((bool)TempData["ResultFlag"] ? "Enhorabuena!" : "Error!")", "@TempData["Message"]", "@Html.Raw((bool)TempData["ResultFlag"] ? "success" : "error")");
+            </script>
+        }
+        <script src="~/js/Retention/script.js" asp-append-version="true"></script>
+    </environment>
+}

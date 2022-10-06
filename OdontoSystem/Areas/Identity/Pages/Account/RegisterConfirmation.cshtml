@@ -1,0 +1,24 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_LayoutLogin";
+}
+
+<div class="ibox">
+    <div class="ibox-content">
+        <h2 style="font-size: 4em;">OdontoSystem</h2>
+        <h2>Tu cuenta ha sido creada exitosamente.</h2>
+        <h3>Revisa tu correo electrónico para confirmarla</h3>
+        <br />
+        <a class="btn btn-primary" asp-page="./Login">Iniciar sesión</a>
+    </div>
+    <div class="ibox-title" style="padding: 0.5em; padding-top: 1em;">
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

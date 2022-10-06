@@ -1,0 +1,25 @@
+﻿:root {
+    --primary-skyfleeter: #29ABE2;
+    --secondary-skyfleeter: #29ABE2;
+}
+body {
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ),url("../images/login-bg.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.logo {
+    background-image: url("../images/Skyfleeter logotipo.png");
+    background-size:cover;
+    width:100%;
+    height:100px;
+    display:block;
+}
+.ibox {
+    opacity: 0.8;
+    -webkit-box-shadow: 5px 5px 15px 5px #000000;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+.btn-primary {
+    background-color: var(--primary-skyfleeter) !important;
+    border-color: var(--primary-skyfleeter) !important;
+}

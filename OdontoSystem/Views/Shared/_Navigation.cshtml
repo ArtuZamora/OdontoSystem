@@ -1,0 +1,34 @@
+﻿@using OdontoSystem.Helpers
+@using System.Security.Claims
+
+@*@inject BussinessLogic.Interfaces.Admin.IPermissionRepository _permission
+
+@{
+    var role = User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
+    var fullName = User.Claims.Where(c => c.Type == "fullName").First().Value;
+    var permissions = (await Html.IsAuthorized(_permission, User)).ToList();
+}*@
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element me-1">
+                    <a class="dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        @*<span class="block m-t-xs font-bold">@fullName</span>*@
+                        <span class="text-muted text-xs block">Opciones <b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="Home" asp-action="Logout" class="dropdown-item">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    FM
+                </div>
+            </li>
+            <li class="@Html.IsSelected(controller: "Home", action: "Index")">
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
