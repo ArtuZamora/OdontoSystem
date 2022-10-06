@@ -1,0 +1,18 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirmar correo";
+    Layout = "_LayoutLogin";
+}
+
+<div class="ibox">
+    <div class="ibox-content">
+        <h2 style="font-size: 4em;">OdontoSystem</h2>
+
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+        <br />
+        <a class="btn btn-primary" asp-page="./Login">Iniciar sesión</a>
+    </div>
+    <div class="ibox-title" style="padding: 0.5em; padding-top: 1em;">
+    </div>
+</div>
