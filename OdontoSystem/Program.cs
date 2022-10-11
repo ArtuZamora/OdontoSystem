@@ -8,12 +8,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OdontoSystem.Data;
 using OdontoSystem.Areas.Identity.Data;
+using BusinessLogic.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("OdontoSystemContextConnection") ?? throw new InvalidOperationException("Connection string 'OdontoSystemContextConnection' not found.");
 
 builder.Services.AddDbContext<OdontoSystemContext>(options =>
 {    options.UseLazyLoadingProxies();
+    options.UseSqlServer(connectionString);
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseLazyLoadingProxies();
     options.UseSqlServer(connectionString);
 });
 
