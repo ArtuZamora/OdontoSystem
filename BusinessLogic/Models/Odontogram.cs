@@ -12,10 +12,11 @@ namespace BusinessLogic.Models
     public   class Odontogram
     {
 
-        [Key]
-        [Display(Name = "Paciente")]
-        public int PatientID { get; set; }
-        public Patient? Patient { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "El campo es requerido")]
+
+        public long Id { get; set; }
+
 
         [Required(ErrorMessage = "El campo es requerido")]
         [Display(Name = "Diente")]
@@ -26,5 +27,11 @@ namespace BusinessLogic.Models
         [MaxLength(255)]
         [Display(Name = "Descripción")]
         public string Description { get; set; }
+
+
+
+        [ForeignKey("PatientId")]
+        [Display(Name = "Paciente")]
+        public virtual Patient Patient { get; set; }
     }
 }

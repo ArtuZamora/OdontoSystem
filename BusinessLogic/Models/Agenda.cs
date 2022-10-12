@@ -37,20 +37,19 @@ namespace BusinessLogic.Models
         public string? State { get; set; }
 
 
+        [ForeignKey("TreatmentId")]
         [Display(Name = "Tratamiento")]
-        public int TreatmentID { get; set; }
-
-        public Treatment Treatment { get; set; }
+        public virtual Treatment Treatment { get; set; }
 
 
-        [Display(Name = "Doctor")]
-        public int DocID { get; set; }
-        //bovioo dudas
-        public IdentityUser? IdentityUser { get; set; }
 
+        [ForeignKey("PatientId")]
         [Display(Name = "Paciente")]
-        public int PatientID { get; set; }
-        public Patient? Patient { get; set; }    
+        public virtual Patient Patient { get; set; }
+
+        /* [ForeignKey("DoctorId")]
+         [Display(Name = "Doctor")]
+        public virtual Doctor Doctor { get; set; }  */
 
 
 

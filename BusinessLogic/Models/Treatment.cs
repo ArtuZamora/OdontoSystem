@@ -41,7 +41,6 @@ namespace BusinessLogic.Models
         [Display(Name = "Tiempo de duración")]
         public double? Duration{ get; set; }
 
-        public ICollection<Agenda> Agendas { get; set; }
 
     }
 }

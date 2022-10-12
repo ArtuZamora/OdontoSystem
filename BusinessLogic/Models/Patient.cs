@@ -78,8 +78,6 @@ namespace BusinessLogic.Models
         [Display(Name = "Fecha de registro")]
         public DateTime RegisterDate { get; set; }
 
-        public ICollection<Agenda> Agendas { get; set; }
-
 
 
 

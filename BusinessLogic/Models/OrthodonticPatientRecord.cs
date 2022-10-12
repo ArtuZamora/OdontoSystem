@@ -10,10 +10,12 @@ namespace BusinessLogic.Models
 {
     public class OrthodonticPatientRecord:PatientRecord
     {
-        [Key]
-        [Display(Name = "Paciente")]
-        public int PatientID { get; set; }
-        public Patient Patient { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "El campo es requerido")]
+      
+        public long Id { get; set; }
+
+      
 
         [Required(ErrorMessage = "El campo es requerido")]
         [Display(Name = "Duración del tratamiento")]
@@ -42,6 +44,13 @@ namespace BusinessLogic.Models
         [MaxLength(255)]
         [Display(Name = "Hábitos")]
         public string? Habits { get; set; }
+
+
+        [ForeignKey("PatientId")]
+        [Display(Name = "Paciente")]
+
+        public virtual Patient Patient { get; set; }
+
 
     }
 }

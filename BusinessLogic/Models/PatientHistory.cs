@@ -10,10 +10,10 @@ namespace BusinessLogic.Models
 {
     public class PatientHistory
     {
-        [Key]
-        [Display(Name = "Paciente")]
-        public int PatientID { get; set; }
-        public Patient Patient { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "El campo es requerido")]
+        [Display(Name = "Código")]
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.Date)]
@@ -28,11 +28,14 @@ namespace BusinessLogic.Models
         public string Description { get; set; }
 
 
-        [Required(ErrorMessage = "El campo es requerido")]
-        [Display(Name = "Doctor")]
-        public int DoctorID { get; set; }
+         [ForeignKey("PatientId")]
+         [Display(Name = "Paciente")]
+        public virtual Patient Patient{ get; set; }  
 
 
-        //agregar la relacion de doctor
+        /* [ForeignKey("DoctorId")]
+         [Display(Name = "Doctor")]
+        public virtual Doctor Doctor { get; set; }  */
+
     }
 }

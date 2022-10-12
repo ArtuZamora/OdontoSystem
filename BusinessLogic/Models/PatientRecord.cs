@@ -10,9 +10,10 @@ namespace BusinessLogic.Models
 {
     public class PatientRecord
     {
-        [Key]
-        public int PatientID { get; set; }
-        public Patient Patient { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required(ErrorMessage = "El campo es requerido")]
+        [Display(Name = "Código")]
+        public long Id { get; set; }
 
 
 
@@ -96,8 +97,11 @@ namespace BusinessLogic.Models
         [MaxLength(255)]
         [Display(Name = "Tipo de limpieza")]
         public string TypeDentalClean { get; set; }
-    
 
+
+        /* [ForeignKey("DoctorId")]
+         [Display(Name = "Doctor")]
+        public virtual Doctor Doctor { get; set; }  */
 
 
     }
