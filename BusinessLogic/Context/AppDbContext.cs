@@ -17,5 +17,6 @@ namespace BusinessLogic.Context
             : base(dbContextOptions)
         {
         }
+
     }
 }
