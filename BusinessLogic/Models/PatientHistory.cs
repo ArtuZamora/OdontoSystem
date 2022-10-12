@@ -25,12 +25,12 @@ namespace BusinessLogic.Models
         [DataType(DataType.MultilineText)]
         [MaxLength(500)]
         [Display(Name = "Descripción")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
-         [ForeignKey("PatientId")]
+        [ForeignKey("PatientId")]
          [Display(Name = "Paciente")]
-        public virtual Patient Patient{ get; set; }  
+        public virtual Patient Patient{ get; set; } 
 
 
         /* [ForeignKey("DoctorId")]

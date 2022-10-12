@@ -18,26 +18,26 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(50)]
         [Display(Name = "Tipo de paciente")]
-        public string TypeName { get; set; }
+        public string TypeName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(50)]
         [Display(Name = "Primer nombre")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
 
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(50)]
         [Display(Name = "Segundo nombre")]
 
-        public string MiddleName { get; set; }
+        public string MiddleName { get; set; } = string.Empty;
 
 
         [Required(ErrorMessage = "El campo es requerido")]
         [StringLength(50)]
         [Display(Name = "Apellidos")]
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.Date)]

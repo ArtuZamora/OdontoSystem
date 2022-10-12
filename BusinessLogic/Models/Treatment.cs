@@ -19,13 +19,13 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(100)]
         [Display(Name = "Nombre del tratamiento")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.MultilineText)]
         [MaxLength(255)]
         [Display(Name = "Descripción")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
 

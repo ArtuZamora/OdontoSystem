@@ -19,9 +19,9 @@ namespace BusinessLogic.Models
 
         [Required(ErrorMessage = "El campo es requerido")]
         [Display(Name = "Duración del tratamiento")]
-        public string TxDuration { get; set; }
+        public string TxDuration { get; set; } = string.Empty;
 
-     
+
         [MaxLength(255)]
         [Display(Name = "Tratamiento previo")]
         public string? TxPrev { get; set; }
