@@ -20,7 +20,7 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(255)]
         [Display(Name = "Motivo de consulta")]
-        public string RFC { get; set; }
+        public string RFC { get; set; } = string.Empty;
 
 
 
@@ -64,9 +64,9 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(255)]
         [Display(Name = "Diagnóstico")]
-        public string Diagnostic { get; set; }
+        public string Diagnostic { get; set; } = string.Empty;
 
-      
+
         [MaxLength(255)]
         [Display(Name = "Extracciones")]
 
@@ -75,7 +75,7 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(255)]
         [Display(Name = "Cordales")]
-        public string WisdomTeeht { get; set; }
+        public string WisdomTeeht { get; set; } = string.Empty;
 
         [MaxLength(255)]
         [Display(Name = "Prostodoncia")]
@@ -96,7 +96,7 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(255)]
         [Display(Name = "Tipo de limpieza")]
-        public string TypeDentalClean { get; set; }
+        public string TypeDentalClean { get; set; }=string.Empty;
 
 
         /* [ForeignKey("DoctorId")]

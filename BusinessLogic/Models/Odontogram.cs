@@ -26,7 +26,7 @@ namespace BusinessLogic.Models
         [DataType(DataType.Date)]
         [MaxLength(255)]
         [Display(Name = "Descripción")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
 

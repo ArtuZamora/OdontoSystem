@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace BusinessLogic.Models
 {
@@ -39,7 +39,7 @@ namespace BusinessLogic.Models
 
         [ForeignKey("TreatmentId")]
         [Display(Name = "Tratamiento")]
-        public virtual Treatment Treatment { get; set; }
+        public virtual Treatment Treatment { get; set; } 
 
 
 
