@@ -76,7 +76,7 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de registro")]
-        public DateTime RegisterDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
 
 

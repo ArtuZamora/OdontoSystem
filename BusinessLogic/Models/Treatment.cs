@@ -34,7 +34,7 @@ namespace BusinessLogic.Models
         [Range(5,300)]
         [RegularExpression(@"^\$?\d+(\.(\d{1,2}))?$", ErrorMessage = "Debe ser un precio válido")]
         [Display(Name = "Precio")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
 
         [DataType(DataType.Duration)]

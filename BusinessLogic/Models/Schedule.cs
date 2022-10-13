@@ -26,12 +26,12 @@ namespace BusinessLogic.Models
         [Required(ErrorMessage = "El campo es requerido")]
         [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{hh:mm}")]
         [Display(Name = "Hora inicio")]
-        public  TimeOnly StartTime { get; set; }
+        public  DateTime StartTime { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{hh:mm}")]
         [Display(Name = "Hora Fin")]
-        public TimeOnly EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
 
         /* [ForeignKey("DoctorId")]
