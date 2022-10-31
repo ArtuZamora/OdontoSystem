@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLogic.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OdontoSystem.Models;
@@ -11,12 +12,15 @@ namespace OdontoSystem.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<OdontoSystem.Areas.Identity.Data.OdontoSystemUser> _signInManager;
+        protected readonly AppDbContext _context;
 
         public HomeController(ILogger<HomeController> logger, 
-                                SignInManager<Areas.Identity.Data.OdontoSystemUser> signInManager)
+                                SignInManager<Areas.Identity.Data.OdontoSystemUser> signInManager, AppDbContext context)
+        
         {
             _logger = logger;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public IActionResult Index()
