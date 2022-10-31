@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using OdontoSystem.Data;
 using OdontoSystem.Areas.Identity.Data;
 using BusinessLogic.Context;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("OdontoSystemContextConnection") ?? throw new InvalidOperationException("Connection string 'OdontoSystemContextConnection' not found.");
@@ -50,6 +52,10 @@ builder.Services.AddDefaultIdentity<OdontoSystemUser>(
                 .AddEntityFrameworkStores<OdontoSystemContext>();
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+builder.Services.AddTransient<IPatientHistoryRepository, PatientHistoryRepository>();
+builder.Services.AddTransient<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddTransient<IPatientRecordRepository, PatientRecordRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();
