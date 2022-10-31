@@ -21,7 +21,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Patient>().AddAsync(patient);
+                await _context.Patient.AddAsync(patient);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -41,12 +41,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             { 
-                var entity = await _context.Set<Patient>().FindAsync(Id);
+                var entity = await _context.Patient.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Patient>().Remove(entity);
+                _context.Patient.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -66,7 +66,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Patient>().Update(patient);
+                _context.Patient.Update(patient);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -83,7 +83,7 @@ namespace BusinessLogic.Repositories
         public async Task<Patient> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Patient>().FindAsync(Id);
+            var details = await _context.Patient.FindAsync(Id);
             return details;
 
         }
@@ -91,11 +91,11 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Patient>> GetAllAsync()
         {
             
-            var response = await _context.Set<Patient>().ToListAsync(); 
+            var response = await _context.Patient.ToListAsync(); 
             return (IEnumerable<Patient>)response;
 
 
-            // List<Patient> listaPatient = await _context.Set<Patient>().ToListAsync; return listaPatient;
+            // List<Patient> listaPatient = await _context.Patient.ToListAsync; return listaPatient;
         }
 
     }

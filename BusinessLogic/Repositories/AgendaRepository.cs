@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Agenda>().FindAsync(Id);
+                var entity = await _context.Agenda.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Agenda>().Remove(entity);
+                _context.Agenda.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Agenda>().Update(agenda);
+                _context.Agenda.Update(agenda);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Agenda> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Agenda>().FindAsync(Id);
+            var details = await _context.Agenda.FindAsync(Id);
             return details;
 
         }
@@ -94,11 +94,8 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Agenda>> GetAllAsync()
         {
 
-            var response = await _context.Set<Agenda>().ToListAsync();
-            return (IEnumerable<Agenda>)response;
-
-
-            // List<Patient> listaPatient = await _context.Set<Patient>().ToListAsync; return listaPatient;
+            var response = await _context.Agenda.ToListAsync();
+            return response;
         }
     }
 }

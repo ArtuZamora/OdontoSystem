@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Constraints>().AddAsync(constraints);
+                await _context.Constraints.AddAsync(constraints);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Constraints>().FindAsync(Id);
+                var entity = await _context.Constraints.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Constraints>().Remove(entity);
+                _context.Constraints.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Constraints>().Update(constraints);
+                _context.Constraints.Update(constraints);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Constraints> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Constraints>().FindAsync(Id);
+            var details = await _context.Constraints.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Constraints>> GetAllAsync()
         {
 
-            var response = await _context.Set<Constraints>().ToListAsync();
+            var response = await _context.Constraints.ToListAsync();
             return (IEnumerable<Constraints>)response;
 
 

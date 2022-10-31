@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Treatment>().AddAsync(treatment);
+                await _context.Treatment.AddAsync(treatment);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Treatment>().FindAsync(Id);
+                var entity = await _context.Treatment.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Treatment>().Remove(entity);
+                _context.Treatment.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Treatment>().Update(treatment);
+                _context.Treatment.Update(treatment);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Treatment> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Treatment>().FindAsync(Id);
+            var details = await _context.Treatment.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Treatment>> GetAllAsync()
         {
 
-            var response = await _context.Set<Treatment>().ToListAsync();
+            var response = await _context.Treatment.ToListAsync();
             return (IEnumerable<Treatment>)response;
 
 

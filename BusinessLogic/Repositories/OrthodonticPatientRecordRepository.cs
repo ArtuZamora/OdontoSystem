@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<OrthodonticPatientRecord>().AddAsync(orthodonticPatientRecord);
+                await _context.OrthodonticPatientRecord.AddAsync(orthodonticPatientRecord);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<OrthodonticPatientRecord>().FindAsync(Id);
+                var entity = await _context.OrthodonticPatientRecord.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<OrthodonticPatientRecord>().Remove(entity);
+                _context.OrthodonticPatientRecord.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<OrthodonticPatientRecord>().Update(orthodonticPatientRecord);
+                _context.OrthodonticPatientRecord.Update(orthodonticPatientRecord);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<OrthodonticPatientRecord> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<OrthodonticPatientRecord>().FindAsync(Id);
+            var details = await _context.OrthodonticPatientRecord.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<OrthodonticPatientRecord>> GetAllAsync()
         {
 
-            var response = await _context.Set<OrthodonticPatientRecord>().ToListAsync();
+            var response = await _context.OrthodonticPatientRecord.ToListAsync();
             return (IEnumerable<OrthodonticPatientRecord>)response;
 
 

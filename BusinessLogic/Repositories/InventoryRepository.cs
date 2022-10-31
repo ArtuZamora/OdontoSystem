@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Inventory>().AddAsync(inventory);
+                await _context.Inventory.AddAsync(inventory);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Inventory>().FindAsync(Id);
+                var entity = await _context.Inventory.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Inventory>().Remove(entity);
+                _context.Inventory.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Inventory>().Update(inventory);
+                _context.Inventory.Update(inventory);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Inventory> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Inventory>().FindAsync(Id);
+            var details = await _context.Inventory.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
 
-            var response = await _context.Set<Inventory>().ToListAsync();
+            var response = await _context.Inventory.ToListAsync();
             return (IEnumerable<Inventory>)response;
 
 

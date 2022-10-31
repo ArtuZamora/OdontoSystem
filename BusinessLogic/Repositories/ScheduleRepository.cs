@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Schedule>().AddAsync(schedule);
+                await _context.Schedule.AddAsync(schedule);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Schedule>().FindAsync(Id);
+                var entity = await _context.Schedule.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Schedule>().Remove(entity);
+                _context.Schedule.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Schedule>().Update(schedule);
+                _context.Schedule.Update(schedule);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Schedule> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Schedule>().FindAsync(Id);
+            var details = await _context.Schedule.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Schedule>> GetAllAsync()
         {
 
-            var response = await _context.Set<Schedule>().ToListAsync();
+            var response = await _context.Schedule.ToListAsync();
             return (IEnumerable<Schedule>)response;
 
 

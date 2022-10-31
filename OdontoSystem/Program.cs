@@ -16,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("OdontoSystemContextConnection") ?? throw new InvalidOperationException("Connection string 'OdontoSystemContextConnection' not found.");
 
 builder.Services.AddDbContext<OdontoSystemContext>(options =>
-{    options.UseLazyLoadingProxies();
+{
+    options.UseLazyLoadingProxies();
     options.UseSqlServer(connectionString);
 });
 
@@ -52,10 +53,19 @@ builder.Services.AddDefaultIdentity<OdontoSystemUser>(
                 .AddEntityFrameworkStores<OdontoSystemContext>();
 
 builder.Services.AddControllers();
-builder.Services.AddTransient<IPatientRepository, PatientRepository>();
-builder.Services.AddTransient<IPatientHistoryRepository, PatientHistoryRepository>();
-builder.Services.AddTransient<IPatientRecordRepository, PatientRecordRepository>();
-builder.Services.AddTransient<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddSingleton<IPatientRepository, PatientRepository>();
+builder.Services.AddSingleton<IPatientHistoryRepository, PatientHistoryRepository>();
+builder.Services.AddSingleton<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddSingleton<IAgendaRepository, AgendaRepository>();
+builder.Services.AddSingleton<IConstraintsRepository, ConstraintsRepository>();
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
+builder.Services.AddSingleton<IOdontogramRepository, OdontogramRepository>();
+builder.Services.AddSingleton<IOrthodonticPatientRecordRepository, OrthodonticPatientRecordRepository>();
+builder.Services.AddSingleton<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddSingleton<ITreatmentRepository, TreatmentRepository>();
+builder.Services.AddSingleton<IAppointmentHistoryRepository, AppointmentHistoryRepository>();
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();

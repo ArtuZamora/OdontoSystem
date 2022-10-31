@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<PatientHistory>().AddAsync(patientHistory);
+                await _context.PatientHistory.AddAsync(patientHistory);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<PatientHistory>().FindAsync(Id);
+                var entity = await _context.PatientHistory.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<PatientHistory>().Remove(entity);
+                _context.PatientHistory.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<PatientHistory>().Update(patientHistory);
+                _context.PatientHistory.Update(patientHistory);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<PatientHistory> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<PatientHistory>().FindAsync(Id);
+            var details = await _context.PatientHistory.FindAsync(Id);
             return details;
 
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<PatientHistory>> GetAllAsync()
         {
 
-            var response = await _context.Set<PatientHistory>().ToListAsync();
+            var response = await _context.PatientHistory.ToListAsync();
             return (IEnumerable<PatientHistory>)response;
 
 

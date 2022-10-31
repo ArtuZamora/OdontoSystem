@@ -23,7 +23,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<AppointmentHistory>().AddAsync(appointmentHistory);
+                await _context.AppointmentHistory.AddAsync(appointmentHistory);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -43,12 +43,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<AppointmentHistory>().FindAsync(Id);
+                var entity = await _context.AppointmentHistory.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<AppointmentHistory>().Remove(entity);
+                _context.AppointmentHistory.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -68,7 +68,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<AppointmentHistory>().Update(appointmentHistory);
+                _context.AppointmentHistory.Update(appointmentHistory);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -85,7 +85,7 @@ namespace BusinessLogic.Repositories
         public async Task<AppointmentHistory> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<AppointmentHistory>().FindAsync(Id);
+            var details = await _context.AppointmentHistory.FindAsync(Id);
             return details;
 
         }
@@ -93,7 +93,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<AppointmentHistory>> GetAllAsync()
         {
 
-            var response = await _context.Set<AppointmentHistory>().ToListAsync();
+            var response = await _context.AppointmentHistory.ToListAsync();
             return (IEnumerable<AppointmentHistory>)response;
 
 

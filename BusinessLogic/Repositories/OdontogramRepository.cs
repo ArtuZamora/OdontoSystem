@@ -24,7 +24,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Odontogram>().AddAsync(odontogram);
+                await _context.Odontogram.AddAsync(odontogram);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -44,12 +44,12 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                var entity = await _context.Set<Odontogram>().FindAsync(Id);
+                var entity = await _context.Odontogram.FindAsync(Id);
 
                 if (entity == null)
                     throw new Exception("Entity is null");
 
-                _context.Set<Odontogram>().Remove(entity);
+                _context.Odontogram.Remove(entity);
                 await _context.SaveChangesAsync();
 
                 flag = true;
@@ -69,7 +69,7 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Set<Odontogram>().Update(odontogram);
+                _context.Odontogram.Update(odontogram);
                 await _context.SaveChangesAsync();
                 flag = true;
             }
@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<Odontogram> DetailsAsync(long Id)
         {
 
-            var details = await _context.Set<Odontogram>().FindAsync(Id);
+            var details = await _context.Odontogram.FindAsync(Id);
             return details;
             
         }
@@ -94,7 +94,7 @@ namespace BusinessLogic.Repositories
         public async Task<IEnumerable<Odontogram>> GetAllAsync()
         {
 
-            var response = await _context.Set<Odontogram>().ToListAsync();
+            var response = await _context.Odontogram.ToListAsync();
             return (IEnumerable<Odontogram>)response;
 
 
