@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OdontoSystem.Data;
 
@@ -11,9 +12,10 @@ using OdontoSystem.Data;
 namespace OdontoSystem.Migrations
 {
     [DbContext(typeof(OdontoSystemContext))]
-    partial class OdontoSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20221031205235_Personal data users")]
+    partial class Personaldatausers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,6 +170,7 @@ namespace OdontoSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -175,6 +178,7 @@ namespace OdontoSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DUI")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -185,6 +189,7 @@ namespace OdontoSystem.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -194,6 +199,7 @@ namespace OdontoSystem.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -217,9 +223,11 @@ namespace OdontoSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Speciality")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telephone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")

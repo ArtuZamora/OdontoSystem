@@ -53,17 +53,17 @@ builder.Services.AddDefaultIdentity<OdontoSystemUser>(
                 .AddEntityFrameworkStores<OdontoSystemContext>();
 
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IPatientRepository, PatientRepository>();
-builder.Services.AddSingleton<IPatientHistoryRepository, PatientHistoryRepository>();
-builder.Services.AddSingleton<IPatientRecordRepository, PatientRecordRepository>();
-builder.Services.AddSingleton<IAgendaRepository, AgendaRepository>();
-builder.Services.AddSingleton<IConstraintsRepository, ConstraintsRepository>();
-builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
-builder.Services.AddSingleton<IOdontogramRepository, OdontogramRepository>();
-builder.Services.AddSingleton<IOrthodonticPatientRecordRepository, OrthodonticPatientRecordRepository>();
-builder.Services.AddSingleton<IScheduleRepository, ScheduleRepository>();
-builder.Services.AddSingleton<ITreatmentRepository, TreatmentRepository>();
-builder.Services.AddSingleton<IAppointmentHistoryRepository, AppointmentHistoryRepository>();
+builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+builder.Services.AddTransient<IPatientHistoryRepository, PatientHistoryRepository>();
+builder.Services.AddTransient<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddTransient<IAgendaRepository, AgendaRepository>();
+builder.Services.AddTransient<IConstraintsRepository, ConstraintsRepository>();
+builder.Services.AddTransient<IInventoryRepository, InventoryRepository>();
+builder.Services.AddTransient<IOdontogramRepository, OdontogramRepository>();
+builder.Services.AddTransient<IOrthodonticPatientRecordRepository, OrthodonticPatientRecordRepository>();
+builder.Services.AddTransient<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddTransient<ITreatmentRepository, TreatmentRepository>();
+builder.Services.AddTransient<IAppointmentHistoryRepository, AppointmentHistoryRepository>();
 
 
 builder.Services.AddControllersWithViews();

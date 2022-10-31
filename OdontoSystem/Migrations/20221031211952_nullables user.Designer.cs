@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OdontoSystem.Data;
 
@@ -11,9 +12,10 @@ using OdontoSystem.Data;
 namespace OdontoSystem.Migrations
 {
     [DbContext(typeof(OdontoSystemContext))]
-    partial class OdontoSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20221031211952_nullables user")]
+    partial class nullablesuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
