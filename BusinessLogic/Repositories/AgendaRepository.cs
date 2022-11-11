@@ -16,7 +16,7 @@ namespace BusinessLogic.Repositories
         public AgendaRepository(AppDbContext context)
         {
             _context = context;
-            
+
         }
 
         public async Task<bool> CreateAsync(Agenda agenda)
@@ -24,13 +24,16 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Set<Agenda>().AddAsync(agenda);
-                await _context.SaveChangesAsync();
-
+                await _context.Database.ExecuteSqlRawAsync("INSERT INTO Agenda(Date, Hour, State, TreatmentId, PatientId) VALUES ({0}, {1}, {2}, {3}, {4})",
+                        agenda.Date,
+                        agenda.Hour,
+                        agenda.State,
+                        agenda.Treatment == null ? null : agenda.Treatment.Id,
+                        agenda.Patient.Id);
                 flag = true;
             }
 
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
@@ -69,8 +72,13 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                _context.Agenda.Update(agenda);
-                await _context.SaveChangesAsync();
+                await _context.Database.ExecuteSqlRawAsync("UPDATE Agenda SET Date = {1}, Hour = {2}, State = {3}, TreatmentId = {4}, PatientId = {5} WHERE Id = {0}",
+                        agenda.Id,
+                        agenda.Date,
+                        agenda.Hour,
+                        agenda.State,
+                        agenda.Treatment == null ? null : agenda.Treatment.Id,
+                        agenda.Patient.Id);
                 flag = true;
             }
 

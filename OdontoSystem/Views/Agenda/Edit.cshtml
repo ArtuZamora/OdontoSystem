@@ -1,0 +1,90 @@
+﻿@model OdontoSystem.Controllers.AgendaViewModel
+@using OdontoSystem.Controllers
+@using BusinessLogic.Models
+
+@{
+    ViewData["Title"] = "Crear";
+    var pacientes = (IEnumerable<Patient>)ViewData["Pacientes"];
+}
+
+<!-- Modal Create Patient -->
+<div id="createPatientModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center">
+                    <!-- Modal Body -->
+                    @await Html.PartialAsync("CreatePatient", new PacienteViewModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h2>Crear cita</h2>
+            </div>
+            <div class="col d-flex justify-content-end align-items-end">
+                <a asp-action="Index" class="btn btn-sm btn-primary" id="createOpt">
+                    <strong>Regresar</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Creación de cita</h5>
+                    <div class="ibox-tools">
+                        @*<a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                        </a>*@
+                    </div>
+                </div>
+                <div class="ibox-content table-responsive">
+                    <form asp-action="Edit" method="post" id="citafrm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label asp-for="Date" class="control-label"></label>
+                                <input asp-for="Date" class="form-control mt-3" />
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <span class="d-flex justify-content-between mb-1">
+                                    <label asp-for="PatientId" class="control-label"></label>
+                                    <button type="button" class="btn btn-sm btn-info" id="createPatient">Crear</button>
+                                    </span>
+                                <select asp-for="PatientId" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    @foreach (var item in pacientes)
+                                    {
+                                        <option value="@item.Id">@string.Concat(item.FirstName, " ", item.MiddleName, " ", item.LastName)</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="PatientId" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center mt-4"><input type="submit" class="btn btn-primary" value="Editar cita" /></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/Paciente/script.js" asp-append-version="true"></script>
+    }
