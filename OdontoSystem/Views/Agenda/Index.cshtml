@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BusinessLogic.Models.Agenda>
+@using OdontoSystem.Areas.Identity.Data
 
 @{
     ViewData["Title"] = "Lista";
+    var users = (IEnumerable<OdontoSystemUser>)ViewData["Usuarios"];
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -39,6 +41,7 @@
                             <tr class="text-center">
                                 <th>Id</th>
                                 <th>Paciente</th>
+                                <th>Doctor</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Tratamiento</th>
@@ -55,6 +58,16 @@
                                     </td>
                                     <td>
                                         @Html.Raw(string.Concat(item.Patient.FirstName, " ", item.Patient.MiddleName, " ", item.Patient.LastName))
+                                    </td>
+                                    <td>
+                                        @if(!string.IsNullOrEmpty(item.DoctorId))
+                                        {
+                                            var user = users.FirstOrDefault(u => u.Id == item.DoctorId);
+                                            if (user != default)
+                                            {
+                                                @Html.Raw(string.Concat(user.Name, " ", user.LastName))
+                                            }
+                                        }
                                     </td>
                                     <td>
                                         @Html.Raw(item.Date.ToString("dd/MM/yyyy"))

@@ -1,10 +1,12 @@
 ﻿@model OdontoSystem.Controllers.AgendaViewModel
+@using OdontoSystem.Areas.Identity.Data
 @using OdontoSystem.Controllers
 @using BusinessLogic.Models
 
 @{
     ViewData["Title"] = "Editar";
     var pacientes = (IEnumerable<Patient>)ViewData["Pacientes"];
+    var users = (IEnumerable<OdontoSystemUser>)ViewData["Usuarios"];
 }
 
 <!-- Modal Create Patient -->
@@ -54,12 +56,12 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="Id" />
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label asp-for="Date" class="control-label"></label>
                                 <input asp-for="Date" class="form-control mt-3" />
                                 <span asp-validation-for="Date" class="text-danger"></span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <span class="d-flex justify-content-between mb-1">
                                     <label asp-for="PatientId" class="control-label"></label>
                                     <button type="button" class="btn btn-sm btn-info" id="createPatient">Crear</button>
@@ -72,6 +74,17 @@
                                     }
                                 </select>
                                 <span asp-validation-for="PatientId" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label asp-for="DoctorId" class="control-label"></label>
+                                <select asp-for="DoctorId" class="form-control mt-3">
+                                    <option value="">Seleccione...</option>
+                                    @foreach (var item in users)
+                                    {
+                                        <option value="@item.Id">@string.Concat(item.Name , " ", item.LastName)</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DoctorId" class="text-danger"></span>
                             </div>
                             <div class="col-12 d-flex justify-content-center mt-4"><input type="submit" class="btn btn-primary" value="Crear cita" /></div>
                         </div>

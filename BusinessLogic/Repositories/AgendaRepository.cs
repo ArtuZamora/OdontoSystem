@@ -24,12 +24,13 @@ namespace BusinessLogic.Repositories
             var flag = false;
             try
             {
-                await _context.Database.ExecuteSqlRawAsync("INSERT INTO Agenda(Date, Hour, State, TreatmentId, PatientId) VALUES ({0}, {1}, {2}, {3}, {4})",
+                await _context.Database.ExecuteSqlRawAsync("INSERT INTO Agenda(Date, Hour, State, TreatmentId, PatientId, DoctorId) VALUES ({0}, {1}, {2}, {3}, {4}, {5})",
                         agenda.Date,
                         agenda.Hour,
                         agenda.State,
                         agenda.Treatment == null ? null : agenda.Treatment.Id,
-                        agenda.Patient.Id);
+                        agenda.Patient.Id,
+                        agenda.DoctorId);
                 flag = true;
             }
 

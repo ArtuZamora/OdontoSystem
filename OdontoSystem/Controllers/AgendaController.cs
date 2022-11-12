@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using OdontoSystem.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace OdontoSystem.Controllers
 {
@@ -19,20 +22,27 @@ namespace OdontoSystem.Controllers
         [Display(Name = "Paciente")]
         [Required(ErrorMessage = "El campo es requerido")]
         public long PatientId { get; set; }
+        [Display(Name = "Doctor")]
+        [Required(ErrorMessage = "El campo es requerido")]
+        public string DoctorId { get; set; }
     }
     public class AgendaController : Controller
     {
         protected readonly IAgendaRepository _agenda;
         protected readonly IPatientRepository _paciente;
+        protected readonly UserManager<OdontoSystemUser> _userManager;
         public AgendaController(IAgendaRepository agenda,
-                                IPatientRepository paciente)
+                                IPatientRepository paciente,
+                                UserManager<OdontoSystemUser> userManager)
         {
             _agenda = agenda;
             _paciente = paciente;
+            _userManager = userManager;
         }
         // GET: AgendaController
         public async Task<IActionResult> Index()
         {
+            ViewData["Usuarios"] = await _userManager.Users.ToListAsync();
             return View(await _agenda.GetAllAsync());
         }
 
@@ -45,6 +55,7 @@ namespace OdontoSystem.Controllers
         // GET: AgendaController/Create
         public async Task<IActionResult> Create()
         {
+            ViewData["Usuarios"] = (await _userManager.Users.ToListAsync()).Where(u => u.Speciality == "Doctor");
             ViewData["Pacientes"] = await _paciente.GetAllAsync();
             return View();
         }
@@ -54,6 +65,7 @@ namespace OdontoSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AgendaViewModel agenda)
         {
+            ViewData["Usuarios"] = (await _userManager.Users.ToListAsync()).Where(u => u.Speciality == "Doctor");
             ViewData["Pacientes"] = await _paciente.GetAllAsync();
             try
             {
@@ -68,7 +80,8 @@ namespace OdontoSystem.Controllers
                         {
                             Id = agenda.PatientId
                         },
-                        Treatment = null
+                        Treatment = null,
+                        DoctorId = agenda.DoctorId
                     });
                     return RedirectToAction(nameof(Index));
                 }
@@ -84,6 +97,7 @@ namespace OdontoSystem.Controllers
         // GET: AgendaController/Edit/5
         public async Task<IActionResult> Edit(long id)
         {
+            ViewData["Usuarios"] = (await _userManager.Users.ToListAsync()).Where(u => u.Speciality == "Doctor");
             ViewData["Pacientes"] = await _paciente.GetAllAsync();
             var agenda = await _agenda.DetailsAsync(id);
             if (agenda != null)
@@ -93,6 +107,7 @@ namespace OdontoSystem.Controllers
                     Id = agenda.Id,
                     Date = agenda.Hour,
                     PatientId = agenda.Patient.Id,
+                    DoctorId = agenda.DoctorId,
                     State = agenda.State
                 };
                 return View(agendaObj);
@@ -105,6 +120,7 @@ namespace OdontoSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AgendaViewModel agenda)
         {
+            ViewData["Usuarios"] = (await _userManager.Users.ToListAsync()).Where(u => u.Speciality == "Doctor");
             ViewData["Pacientes"] = await _paciente.GetAllAsync();
             try
             {
@@ -120,6 +136,7 @@ namespace OdontoSystem.Controllers
                         {
                             Id = agenda.PatientId
                         },
+                        DoctorId = agenda.DoctorId,
                         Treatment = null
                     });
                     return RedirectToAction(nameof(Index));
@@ -147,7 +164,8 @@ namespace OdontoSystem.Controllers
                         Hour = agenda.Date,
                         State = "Cancelada",
                         Patient = agenda.Patient,
-                        Treatment = agenda.Treatment
+                        Treatment = agenda.Treatment,
+                        DoctorId = agenda.DoctorId
                     });
                 }
                 catch

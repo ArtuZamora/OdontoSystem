@@ -31,9 +31,7 @@ namespace BusinessLogic.Models
         [ForeignKey("PatientId")]
         [Display(Name = "Paciente")]
         public virtual Patient Patient { get; set; }
-
-        /* [ForeignKey("DoctorId")]
-         [Display(Name = "Doctor")]
-        public virtual Doctor Doctor { get; set; }  */
+        [Display(Name = "Doctor")]
+        public string DoctorId { get; set; }
     }
 }
