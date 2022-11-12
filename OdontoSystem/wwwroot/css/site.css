@@ -4,3 +4,16 @@
     background-color: #1ab394 !important;
     color: white !important;
 }
+
+.tooth-svg{
+    width: 34px;
+}
+
+    .tooth-svg.active {
+        filter: invert(18%) sepia(95%) saturate(2289%) hue-rotate(207deg) brightness(92%) contrast(102%);
+    }
+
+.odonto-numbers {
+    font-weight: bold;
+    text-align: center;
+}

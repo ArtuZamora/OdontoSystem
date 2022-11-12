@@ -8,14 +8,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessLogic.Models
 {
-    public class OrthodonticPatientRecord:PatientRecord
+    public class OrthodonticPatientRecord : PatientRecord
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required(ErrorMessage = "El campo es requerido")]
-      
+
         public long Id { get; set; }
 
-      
+
 
         [Required(ErrorMessage = "El campo es requerido")]
         [Display(Name = "Duración del tratamiento")]
@@ -34,12 +34,12 @@ namespace BusinessLogic.Models
         [Display(Name = "Diastemas")]
         public string? Diastemas { get; set; }
 
-      
+
         [Display(Name = "Tipo de mordida")]
         public int BiteType { get; set; }
 
         [Display(Name = "Tipo de apiñamiento")]
-        public bool Crowding { get; set; }
+        public string? Crowding { get; set; }
 
         [MaxLength(255)]
         [Display(Name = "Hábitos")]
@@ -51,6 +51,8 @@ namespace BusinessLogic.Models
 
         public virtual Patient Patient { get; set; }
 
+        [Display(Name = "Perfil")]
+        public string? Profile { get; set; }
 
     }
 }

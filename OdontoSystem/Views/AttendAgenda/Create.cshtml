@@ -1,0 +1,302 @@
+﻿@model OdontoSystem.Controllers.PatientRecordViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!-- Modal Create -->
+<div id="odontogramModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center">
+                    <!-- Modal Body -->
+                    <h1>Crear nuevo almacen</h1>
+                    <hr />
+                    <div class="form-group">
+                        <label class="control-label">Descripción</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                        <span class="text-danger" id="ondontogramError"></span>
+                    </div>
+                    <div class="form-group mt-3 d-flex justify-content-center">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Historia clínica</h5>
+                    <div class="ibox-tools">
+                        @*<a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                        </a>*@
+                    </div>
+                </div>
+                <div class="ibox-content table-responsive">
+                    <form asp-action="Create" id="createAttendFrm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" class="form-control" />
+                        <input type="hidden" asp-for="PatientId" class="form-control" />
+                        <div class="row">
+                            <div class="form-group col-8">
+                                <label asp-for="PatientId" class="control-label"></label>
+                                <input class="form-control" readonly />
+                                <span asp-validation-for="PatientId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4">
+                                <label class="control-label">Tipo de paciente</label>
+                                <select class="form-control" name="patientType">
+                                    <option value="General">General</option>
+                                    <option value="Ortodoncia">Ortodoncia</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6 mt-2">
+                                <label class="control-label">Edad</label>
+                                <input class="form-control" readonly />
+                            </div>
+                            <div class="form-group col-6 mt-2">
+                                <label class="control-label">Contacto</label>
+                                <input class="form-control" readonly />
+                            </div>
+                            <div class="form-group col-12 mt-2">
+                                <label asp-for="RFC" class="control-label"></label>
+                                <textarea asp-for="RFC" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="RFC" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="Hospitalizations" class="control-label"></label>
+                                <input asp-for="Hospitalizations" class="form-control" />
+                                <span asp-validation-for="Hospitalizations" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="CurrentMedicTx" class="control-label"></label>
+                                <input asp-for="CurrentMedicTx" class="form-control" />
+                                <span asp-validation-for="CurrentMedicTx" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="CoagulationP" class="control-label"></label>
+                                <input asp-for="CoagulationP" class="form-control" />
+                                <span asp-validation-for="CoagulationP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="RespiratoryP" class="control-label"></label>
+                                <input asp-for="RespiratoryP" class="form-control" />
+                                <span asp-validation-for="RespiratoryP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="Trauma" class="control-label"></label>
+                                <input asp-for="Trauma" class="form-control" />
+                                <span asp-validation-for="Trauma" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="Allergies" class="control-label"></label>
+                                <input asp-for="Allergies" class="form-control" />
+                                <span asp-validation-for="Allergies" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6 mt-2">
+                                <label asp-for="SystemicDiseases" class="control-label"></label>
+                                <textarea asp-for="SystemicDiseases" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="SystemicDiseases" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6 mt-2">
+                                <label asp-for="DentalHistory" class="control-label"></label>
+                                <textarea asp-for="DentalHistory" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="DentalHistory" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-check mt-2">
+                                <label class="form-check-label px-3">
+                                    <input class="form-check-input" asp-for="Smokes" /> @Html.DisplayNameFor(model => model.Smokes)
+                                </label>
+                                <label class="form-check-label px-3">
+                                    <input class="form-check-input" asp-for="AlcoholicDrinks" /> @Html.DisplayNameFor(model => model.AlcoholicDrinks)
+                                </label>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div id="odontogram">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td class="odonto-numbers">8</td>
+                                            <td class="odonto-numbers">7</td>
+                                            <td class="odonto-numbers">6</td>
+                                            <td class="odonto-numbers">5</td>
+                                            <td class="odonto-numbers">4</td>
+                                            <td class="odonto-numbers">3</td>
+                                            <td class="odonto-numbers">2</td>
+                                            <td class="odonto-numbers">1</td>
+                                            <td class="odonto-numbers">1</td>
+                                            <td class="odonto-numbers">2</td>
+                                            <td class="odonto-numbers">3</td>
+                                            <td class="odonto-numbers">4</td>
+                                            <td class="odonto-numbers">5</td>
+                                            <td class="odonto-numbers">6</td>
+                                            <td class="odonto-numbers">7</td>
+                                            <td class="odonto-numbers">8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="8" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="7" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="6" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="5" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="4" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="3" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="2" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="left" data-tooth="1" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="1" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="2" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="3" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="4" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="5" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="6" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="7" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="1" data-position="right" data-tooth="8" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="8" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="7" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="6" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="5" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="4" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="3" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="2" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="left" data-tooth="1" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="1" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="2" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="3" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="4" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="5" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="6" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="7" /></td>
+                                            <td><img src="~/images/tooth-svg.svg" class="tooth-svg" data-row="2" data-position="right" data-tooth="8" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="odonto-numbers">8</td>
+                                            <td class="odonto-numbers">7</td>
+                                            <td class="odonto-numbers">6</td>
+                                            <td class="odonto-numbers">5</td>
+                                            <td class="odonto-numbers">4</td>
+                                            <td class="odonto-numbers">3</td>
+                                            <td class="odonto-numbers">2</td>
+                                            <td class="odonto-numbers">1</td>
+                                            <td class="odonto-numbers">1</td>
+                                            <td class="odonto-numbers">2</td>
+                                            <td class="odonto-numbers">3</td>
+                                            <td class="odonto-numbers">4</td>
+                                            <td class="odonto-numbers">5</td>
+                                            <td class="odonto-numbers">6</td>
+                                            <td class="odonto-numbers">7</td>
+                                            <td class="odonto-numbers">8</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="orto">
+                                    <img src="~/images/tipo-mordida.jpg" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12 mt-2">
+                                <label asp-for="Diagnostic" class="control-label"></label>
+                                <textarea asp-for="Diagnostic" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Diagnostic" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="TypeDentalClean" class="control-label"></label>
+                                <input asp-for="TypeDentalClean" class="form-control" />
+                                <span asp-validation-for="TypeDentalClean" class="text-danger"></span>
+                            </div>
+                            @*General*@
+                            <div class="form-group col-4 mt-2 general">
+                                <label asp-for="Extractions" class="control-label"></label>
+                                <input asp-for="Extractions" class="form-control" />
+                                <span asp-validation-for="Extractions" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 general">
+                                <label asp-for="WisdomTeeht" class="control-label"></label>
+                                <input asp-for="WisdomTeeht" class="form-control" />
+                                <span asp-validation-for="WisdomTeeht" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 general">
+                                <label asp-for="Prosthodontics" class="control-label"></label>
+                                <input asp-for="Prosthodontics" class="form-control" />
+                                <span asp-validation-for="Prosthodontics" class="text-danger"></span>
+                            </div>
+                            @*Fin General*@
+                            @*Ortodoncio*@
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="TxPrev" class="control-label"></label>
+                                <input asp-for="TxPrev" class="form-control" />
+                                <span asp-validation-for="TxPrev" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="TxDuration" class="control-label"></label>
+                                <input asp-for="TxDuration" class="form-control" />
+                                <span asp-validation-for="TxDuration" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="Profile" class="control-label"></label>
+                                <input asp-for="Profile" class="form-control" />
+                                <span asp-validation-for="Profile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="Midlines" class="control-label"></label>
+                                <input asp-for="Midlines" class="form-control" />
+                                <span asp-validation-for="Midlines" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="Diastemas" class="control-label"></label>
+                                <input asp-for="Diastemas" class="form-control" />
+                                <span asp-validation-for="Diastemas" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="BiteType" class="control-label"></label>
+                                <input asp-for="BiteType" class="form-control" />
+                                <span asp-validation-for="BiteType" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="Crowding" class="control-label"></label>
+                                <input asp-for="Crowding" class="form-control" />
+                                <span asp-validation-for="Crowding" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2 orto">
+                                <label asp-for="Habits" class="control-label"></label>
+                                <input asp-for="Habits" class="form-control" />
+                                <span asp-validation-for="Habits" class="text-danger"></span>
+                            </div>
+                            @*Fin Ortodoncia*@
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="PanoramicRx" class="control-label"></label>
+                                <input asp-for="PanoramicRx" class="form-control" />
+                                <span asp-validation-for="PanoramicRx" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="CephalometricRx" class="control-label"></label>
+                                <input asp-for="CephalometricRx" class="form-control" />
+                                <span asp-validation-for="CephalometricRx" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-4 mt-2">
+                                <label asp-for="PeriapicalRx" class="control-label"></label>
+                                <input asp-for="PeriapicalRx" class="form-control" />
+                                <span asp-validation-for="PeriapicalRx" class="text-danger"></span>
+                            </div>
+                            @*Ortodoncia*@
+                        </div>
+                        <div class="form-group mt-3 d-flex justify-content-center">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/AttendAgenda/script.js" asp-append-version="true"></script>
+}
