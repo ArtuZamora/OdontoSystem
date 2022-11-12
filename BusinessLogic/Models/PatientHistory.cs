@@ -17,16 +17,15 @@ namespace BusinessLogic.Models
 
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de cita")]
         public DateTime AppointmentDate { get; set; }
-
+        [Required(ErrorMessage = "El campo es requerido")]
+        public string DoctorId { get; set; }
         [Required(ErrorMessage = "El campo es requerido")]
         [DataType(DataType.MultilineText)]
         [MaxLength(500)]
         [Display(Name = "Descripción")]
         public string Description { get; set; } = string.Empty;
-
 
         [ForeignKey("PatientId")]
          [Display(Name = "Paciente")]

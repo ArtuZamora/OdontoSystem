@@ -4,6 +4,7 @@ using BusinessLogic.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessLogic.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221112175824_FixTypes-PatientRecord")]
+    partial class FixTypesPatientRecord
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,13 +157,6 @@ namespace BusinessLogic.Migrations
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Row")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Side")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ToothNumber")
                         .HasColumnType("int");
 
@@ -242,10 +237,6 @@ namespace BusinessLogic.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
@@ -429,9 +420,6 @@ namespace BusinessLogic.Migrations
 
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Profile")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TxDuration")
                         .IsRequired()

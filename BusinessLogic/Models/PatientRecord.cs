@@ -57,8 +57,9 @@ namespace BusinessLogic.Models
         [Display(Name = "Antecedentes odontológicos")]
         public string? DentalHistory { get; set; }
 
-     
-        [Display(Name = "Bebidas alcohólicas")]
+        [Display(Name = "Fuma?")]
+        public bool Smokes { get; set; }
+        [Display(Name = "Bebidas alcohólicas?")]
         public bool AlcoholicDrinks { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
