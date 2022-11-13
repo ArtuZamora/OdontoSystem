@@ -29,6 +29,12 @@
             <li class="@Html.IsSelected(controller: "Home", action: "Index")">
                 <a asp-controller="Home" asp-action="Index" class="text-decoration-none"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a>
             </li>
+            <li class="@Html.IsSelected(controller: "Inventory", action: "Index")">
+                <a asp-controller="Inventory" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Inventario</span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Agenda", action: "Index")">
+                <a asp-controller="Agenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda</span></a>
+            </li>
         </ul>
     </div>
 </nav>

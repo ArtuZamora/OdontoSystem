@@ -33,6 +33,10 @@ namespace BusinessLogic.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DoctorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Hour")
                         .HasColumnType("datetime2");
 
@@ -43,7 +47,7 @@ namespace BusinessLogic.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("TreatmentId")
+                    b.Property<long?>("TreatmentId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -151,6 +155,13 @@ namespace BusinessLogic.Migrations
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Side")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ToothNumber")
                         .HasColumnType("int");
 
@@ -232,6 +243,10 @@ namespace BusinessLogic.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("DoctorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
 
@@ -310,6 +325,9 @@ namespace BusinessLogic.Migrations
                     b.Property<string>("RespiratoryP")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Smokes")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SystemicDiseases")
                         .HasMaxLength(255)
@@ -394,8 +412,8 @@ namespace BusinessLogic.Migrations
                     b.Property<int>("BiteType")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Crowding")
-                        .HasColumnType("bit");
+                    b.Property<string>("Crowding")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Diastemas")
                         .HasMaxLength(255)
@@ -411,6 +429,9 @@ namespace BusinessLogic.Migrations
 
                     b.Property<long>("PatientId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Profile")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TxDuration")
                         .IsRequired()
@@ -435,9 +456,7 @@ namespace BusinessLogic.Migrations
 
                     b.HasOne("BusinessLogic.Models.Treatment", "Treatment")
                         .WithMany()
-                        .HasForeignKey("TreatmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TreatmentId");
 
                     b.Navigation("Patient");
 

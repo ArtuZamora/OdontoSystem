@@ -25,6 +25,7 @@ namespace BusinessLogic.Context
         public DbSet<AppointmentHistory> AppointmentHistory { get; set; }
         public DbSet<Constraints> Constraints { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
+
         public DbSet<Odontogram> Odontogram{ get; set; }
         public DbSet<OrthodonticPatientRecord> OrthodonticPatientRecord { get; set; }
         public DbSet<Patient> Patient { get; set; }
@@ -33,11 +34,6 @@ namespace BusinessLogic.Context
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Treatment> Treatment { get; set; }
 
-
-
-
-
-
-
+   
     }
 }
