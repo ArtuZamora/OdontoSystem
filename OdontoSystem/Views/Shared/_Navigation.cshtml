@@ -1,13 +1,13 @@
-﻿@using OdontoSystem.Helpers
+@using OdontoSystem.Helpers
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@using OdontoSystem.Areas.Identity.Data
 
-@*@inject BussinessLogic.Interfaces.Admin.IPermissionRepository _permission
+@inject UserManager<OdontoSystemUser> _userManager
 
 @{
-    var role = User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
-    var fullName = User.Claims.Where(c => c.Type == "fullName").First().Value;
-    var permissions = (await Html.IsAuthorized(_permission, User)).ToList();
-}*@
+    var actualUser = await _userManager.FindByIdAsync(User.Claims.First().Value);
+}
 
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
@@ -29,18 +29,22 @@
             <li class="@Html.IsSelected(controller: "Home", action: "Index")">
                 <a asp-controller="Home" asp-action="Index" class="text-decoration-none"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a>
             </li>
-<<<<<<< Updated upstream
-=======
+
             <li class="@Html.IsSelected(controller: "Inventory", action: "Index")">
                 <a asp-controller="Inventory" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Inventario</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Agenda", action: "Index")">
                 <a asp-controller="Agenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda</span></a>
             </li>
-            <li class="@Html.IsSelected(controller: "Treatment", action: "Index")">
-                <a asp-controller="Treatment" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Tratamiento</span></a>
-            </li>
->>>>>>> Stashed changes
+
+
+            @if (actualUser.Speciality == "Doctor")
+            {
+                <li class="@Html.IsSelected(controller: "AttendAgenda", action: "Index")">
+                    <a asp-controller="AttendAgenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda de hoy</span></a>
+                </li>
+            }
+
         </ul>
     </div>
 </nav>

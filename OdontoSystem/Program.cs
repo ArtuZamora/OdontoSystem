@@ -8,12 +8,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OdontoSystem.Data;
 using OdontoSystem.Areas.Identity.Data;
+using BusinessLogic.Context;
+using BusinessLogic.Interfaces;
+using BusinessLogic.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("OdontoSystemContextConnection") ?? throw new InvalidOperationException("Connection string 'OdontoSystemContextConnection' not found.");
 
 builder.Services.AddDbContext<OdontoSystemContext>(options =>
-{    options.UseLazyLoadingProxies();
+{
+    options.UseLazyLoadingProxies();
+    options.UseSqlServer(connectionString);
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseLazyLoadingProxies();
     options.UseSqlServer(connectionString);
 });
 
@@ -43,6 +53,19 @@ builder.Services.AddDefaultIdentity<OdontoSystemUser>(
                 .AddEntityFrameworkStores<OdontoSystemContext>();
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IPatientHistoryRepository, PatientHistoryRepository>();
+builder.Services.AddScoped<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddScoped<IAgendaRepository, AgendaRepository>();
+builder.Services.AddScoped<IConstraintsRepository, ConstraintsRepository>();
+builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+builder.Services.AddScoped<IOdontogramRepository, OdontogramRepository>();
+builder.Services.AddScoped<IOrthodonticPatientRecordRepository, OrthodonticPatientRecordRepository>();
+builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddScoped<ITreatmentRepository, TreatmentRepository>();
+builder.Services.AddScoped<IAppointmentHistoryRepository, AppointmentHistoryRepository>();
+
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();
