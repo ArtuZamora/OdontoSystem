@@ -86,7 +86,7 @@ namespace BusinessLogic.Repositories
         public async Task<OrthodonticPatientRecord> DetailsAsync(long Id)
         {
 
-            var details = await _context.OrthodonticPatientRecord.FindAsync(Id);
+            var details = await _context.OrthodonticPatientRecord.AsNoTracking().FirstOrDefaultAsync(o => o.Id == Id);
             return details;
 
         }

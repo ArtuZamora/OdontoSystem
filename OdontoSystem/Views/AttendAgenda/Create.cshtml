@@ -1,7 +1,17 @@
 ﻿@model OdontoSystem.Controllers.PatientRecordViewModel
+@using OdontoSystem.Areas.Identity.Data
+@using BusinessLogic.Models
 
 @{
     ViewData["Title"] = "Create";
+    var treatments = (IEnumerable<Treatment>)ViewData["Tratamientos"];
+    var doctors = (IEnumerable<OdontoSystemUser>)ViewData["Doctores"];
+    var history = (IEnumerable<PatientHistory>)ViewData["Historia"];
+    var odontogram = (IEnumerable<Odontogram>)ViewData["Odontograma"];
+    var myUser = (OdontoSystemUser)ViewData["MyData"];
+    var patient = (Patient)ViewData["Paciente"];
+    var nacimiento = patient.BirthDate;
+    int edad = DateTime.Today.AddTicks(-nacimiento.Ticks).Year - 1;
 }
 
 <!-- Modal Create -->
@@ -11,15 +21,16 @@
             <div class="modal-body">
                 <div class="row d-flex justify-content-center">
                     <!-- Modal Body -->
-                    <h1>Crear nuevo almacen</h1>
+                    <h1>Registrar datos de odontograma</h1>
                     <hr />
                     <div class="form-group">
                         <label class="control-label">Descripción</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" name="odoDescription" rows="3"></textarea>
                         <span class="text-danger" id="ondontogramError"></span>
                     </div>
                     <div class="form-group mt-3 d-flex justify-content-center">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <input name="odoSubmit" type="submit" value="Guardar" class="btn btn-primary" />
+                        <input name="odoDelete" type="submit" value="Eliminar datos" class="btn btn-danger mx-2" />
                     </div>
                 </div>
             </div>
@@ -42,28 +53,32 @@
                 <div class="ibox-content table-responsive">
                     <form asp-action="Create" id="createAttendFrm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" class="form-control" />
+                        <input type="hidden" asp-for="RecordId" class="form-control" />
                         <input type="hidden" asp-for="PatientId" class="form-control" />
+                        <input type="hidden" asp-for="AgendaId" class="form-control" />
                         <div class="row">
                             <div class="form-group col-8">
-                                <label asp-for="PatientId" class="control-label"></label>
-                                <input class="form-control" readonly />
+                                <div class="d-flex justify-content-between">
+                                    <label asp-for="PatientId" class="control-label"></label>
+                                    <a asp-controller="Patient" asp-action="Edit" asp-route-id="" class="btn btn-sm btn-info mb-1" target="_blank">Ver info</a>
+                                </div>
+                                <input class="form-control" value="@patient.FirstName @patient.LastName" readonly />
                                 <span asp-validation-for="PatientId" class="text-danger"></span>
                             </div>
                             <div class="form-group col-4">
                                 <label class="control-label">Tipo de paciente</label>
-                                <select class="form-control" name="patientType">
+                                <select class="form-control" name="PatientType">
                                     <option value="General">General</option>
                                     <option value="Ortodoncia">Ortodoncia</option>
                                 </select>
                             </div>
                             <div class="form-group col-6 mt-2">
                                 <label class="control-label">Edad</label>
-                                <input class="form-control" readonly />
+                                <input class="form-control" readonly value="@edad" />
                             </div>
                             <div class="form-group col-6 mt-2">
                                 <label class="control-label">Contacto</label>
-                                <input class="form-control" readonly />
+                                <input class="form-control" readonly value="@patient.CellPhone" />
                             </div>
                             <div class="form-group col-12 mt-2">
                                 <label asp-for="RFC" class="control-label"></label>
@@ -77,7 +92,13 @@
                             </div>
                             <div class="form-group col-4 mt-2">
                                 <label asp-for="CurrentMedicTx" class="control-label"></label>
-                                <input asp-for="CurrentMedicTx" class="form-control" />
+                                <select asp-for="CurrentMedicTx" class="form-control">
+                                    <option value="">Selecione...</option>
+                                    @foreach (var item in treatments)
+                                    {
+                                        <option value="@item.Id">@item.Description ($@item.Price)</option>
+                                    }
+                                </select>
                                 <span asp-validation-for="CurrentMedicTx" class="text-danger"></span>
                             </div>
                             <div class="form-group col-4 mt-2">
@@ -226,7 +247,7 @@
                                 <span asp-validation-for="Prosthodontics" class="text-danger"></span>
                             </div>
                             @*Fin General*@
-                            @*Ortodoncio*@
+                            @*Ortodoncia*@
                             <div class="form-group col-4 mt-2 orto">
                                 <label asp-for="TxPrev" class="control-label"></label>
                                 <input asp-for="TxPrev" class="form-control" />
@@ -254,7 +275,13 @@
                             </div>
                             <div class="form-group col-4 mt-2 orto">
                                 <label asp-for="BiteType" class="control-label"></label>
-                                <input asp-for="BiteType" class="form-control" />
+                                <select asp-for="BiteType" class="form-control">
+                                    <option value="0">Seleccione...</option>
+                                    <option value="1">Tipo I</option>
+                                    <option value="2">Tipo II 1</option>
+                                    <option value="3">Tipo II 2</option>
+                                    <option value="4">Tipo III</option>
+                                </select>
                                 <span asp-validation-for="BiteType" class="text-danger"></span>
                             </div>
                             <div class="form-group col-4 mt-2 orto">
@@ -269,21 +296,64 @@
                             </div>
                             @*Fin Ortodoncia*@
                             <div class="form-group col-4 mt-2">
-                                <label asp-for="PanoramicRx" class="control-label"></label>
-                                <input asp-for="PanoramicRx" class="form-control" />
+                                <div class="d-flex justify-content-between">
+                                    <label asp-for="PanoramicRx" class="control-label"></label>
+                                    @if(!string.IsNullOrEmpty(Model.PanoramicRx)){
+                                            <a href="~/files/@Model.PanoramicRx" target="_blank" class="btn btn-sm btn-info mb-2">Ver</a>
+                                    }
+                                </div>
+                                <input type="file" asp-for="PanoramicRx" class="form-control" accept="application/pdf" />
                                 <span asp-validation-for="PanoramicRx" class="text-danger"></span>
                             </div>
                             <div class="form-group col-4 mt-2">
-                                <label asp-for="CephalometricRx" class="control-label"></label>
-                                <input asp-for="CephalometricRx" class="form-control" />
+                                <div class="d-flex justify-content-between">
+                                    <label asp-for="CephalometricRx" class="control-label"></label>
+                                    @if(!string.IsNullOrEmpty(Model.CephalometricRx)){
+                                            <a href="~/files/@Model.CephalometricRx" target="_blank" class="btn btn-sm btn-info mb-2">Ver</a>
+                                    }
+                                </div>
+                                <input type="file" asp-for="CephalometricRx" class="form-control" accept="application/pdf" />
                                 <span asp-validation-for="CephalometricRx" class="text-danger"></span>
                             </div>
                             <div class="form-group col-4 mt-2">
-                                <label asp-for="PeriapicalRx" class="control-label"></label>
-                                <input asp-for="PeriapicalRx" class="form-control" />
+                                <div class="d-flex justify-content-between">
+                                    <label asp-for="PeriapicalRx" class="control-label"></label>
+                                    @if(!string.IsNullOrEmpty(Model.PeriapicalRx)){
+                                            <a href="~/files/@Model.PeriapicalRx" target="_blank" class="btn btn-sm btn-info mb-2">Ver</a>
+                                    }
+                                </div>
+                                <input type="file" asp-for="PeriapicalRx" class="form-control" accept="application/pdf" />
                                 <span asp-validation-for="PeriapicalRx" class="text-danger"></span>
                             </div>
-                            @*Ortodoncia*@
+                            <div class="col-12 mt-2 table-responsive">
+                                <h2>Procedimientos</h2>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Doctor(a)</th>
+                                            <th>Procedimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in history)
+                                        {
+                                            var doctor = doctors.FirstOrDefault(d => d.Id == item.DoctorId);
+                                            <tr>
+                                                <td>@item.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@doctor.Name @doctor.LastName</td>
+                                                <td class="white-space: pre-line;">@item.Description</td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td><input type="date" class="form-control" name="appointmentDate" value="@Html.Raw(DateTime.Now.ToString("yyyy-MM-dd"))" /></td>
+                                            <td>@myUser.Name @myUser.LastName</td>
+                                            <td class="white-space: pre-line;"><textarea class="form-control" name="description" rows="3"></textarea></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="form-group mt-3 d-flex justify-content-center">
                             <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -298,5 +368,11 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        var odontogram = @Html.Raw(Json.Serialize(odontogram));
+        var patientId = @patient.Id;
+        var doctorId = '@myUser.Id';
+        var patientType = '@Model.PatientType';
+    </script>
     <script src="~/js/AttendAgenda/script.js" asp-append-version="true"></script>
 }

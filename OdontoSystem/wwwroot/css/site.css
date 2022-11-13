@@ -7,10 +7,11 @@
 
 .tooth-svg{
     width: 34px;
+    cursor: pointer;
 }
 
     .tooth-svg.active {
-        filter: invert(18%) sepia(95%) saturate(2289%) hue-rotate(207deg) brightness(92%) contrast(102%);
+        filter: invert(38%) sepia(95%) saturate(2293%) hue-rotate(184deg) brightness(121%) contrast(97%);
     }
 
 .odonto-numbers {
