@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using OdontoSystem.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace OdontoSystem.Controllers
 {
@@ -30,13 +33,16 @@ namespace OdontoSystem.Controllers
     public class PacienteController : Controller
     {
         protected readonly IPatientRepository _paciente;
-        public PacienteController(IPatientRepository paciente)
+        protected readonly UserManager<OdontoSystemUser> _userManager;
+        public PacienteController(IPatientRepository paciente, UserManager<OdontoSystemUser> userManager)
         {
             _paciente = paciente;
+            _userManager = userManager;
         }
         // GET: AgendaController
         public async Task<IActionResult> Index()
         {
+            ViewData["Usuarios"] = await _userManager.Users.ToListAsync();
             return View(await _paciente.GetAllAsync());
         }
         public async Task<IEnumerable<Patient>> GetDDL()
