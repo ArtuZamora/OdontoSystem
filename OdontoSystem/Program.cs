@@ -11,6 +11,8 @@ using OdontoSystem.Areas.Identity.Data;
 using BusinessLogic.Context;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Repositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using OdontoSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("OdontoSystemContextConnection") ?? throw new InvalidOperationException("Connection string 'OdontoSystemContextConnection' not found.");
@@ -53,6 +55,8 @@ builder.Services.AddDefaultIdentity<OdontoSystemUser>(
                 .AddEntityFrameworkStores<OdontoSystemContext>();
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IViewRender, ViewRender>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IPatientHistoryRepository, PatientHistoryRepository>();
 builder.Services.AddScoped<IPatientRecordRepository, PatientRecordRepository>();

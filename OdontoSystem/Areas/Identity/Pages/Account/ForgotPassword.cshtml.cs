@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BusinessLogic.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using OdontoSystem.Areas.Identity.Data;
+using OdontoSystem.Services;
 
 namespace OdontoSystem.Areas.Identity.Pages.Account
 {
@@ -55,7 +57,7 @@ namespace OdontoSystem.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
@@ -71,10 +73,22 @@ namespace OdontoSystem.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                EmailTemplate template = new EmailTemplate()
+                {
+                    Title = "Recuperar cuenta",
+                    MailInfo = "info.fleeter.manager@gmail.com",
+                    Headline = "Recupera tu cuenta",
+                    Message = $"Has solicitado una recuperación de tu cuenta. Si no has sido tu ignora este mensaje.<br /><br /> De lo contrario accede a este enlace:",
+                    Phone = "+503 7777-7777",
+                    GetInTouch = "Mantente en contacto con nosotros",
+                    Thanks = "¡Gracias por ser parte de OdontoSystem!",
+                    Link = "Recuperar",
+                    Url = $"{callbackUrl}"
+                };
+
+                await ((EmailSender)_emailSender).SendEmailAsync(Input.Email, template);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
