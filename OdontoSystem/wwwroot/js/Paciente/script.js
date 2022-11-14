@@ -32,6 +32,19 @@ $(document).ready(function () {
             Swal.fire('Error', result, 'error').then(function () { $('#createPatientModal').modal('show'); });
         }
     });
+    var table = $('#table').DataTable({
+        "language": { "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json" },
+        "responsive": true,
+        "lengthChange": true,
+        "dom": '<"html5buttons"B>lTfgitp',
+        "autoWidth": false,
+        "buttons": [
+            { extend: 'copy' },
+            { extend: 'excel' },
+            { extend: 'pdf' },
+            { extend: 'colvis' }
+        ]
+    });
 });
 
 async function refreshPacientes() {
