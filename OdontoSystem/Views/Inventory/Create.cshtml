@@ -1,0 +1,68 @@
+﻿@model BusinessLogic.Models.Inventory
+
+@{
+    ViewData["Title"] = "Agregar Producto";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h2>Administración de inventario | Agregando Material </h2>
+            </div>
+            <div class="col d-flex justify-content-end align-items-end">
+                <button class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Index","Inventory")'">
+                    <strong>Regresar</strong>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="d-flex align-item-center justify-content-center mt-3">
+    <form method="post" class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="col-12">
+            <label asp-for="Brand" class="form-label"></label>
+            <input asp-for="Brand" class="form-control" />
+            <span asp-validation-for="Brand" class="text-danger"></span>
+        </div>
+        <div class="col-12 mt-2">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-12 mt-2">
+            <label asp-for="Stock" class="form-label"></label>
+            <input asp-for="Stock" class="form-control"/>
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 mt-2">
+            <label asp-for="CreateDate" class="form-label"></label>
+            <input asp-for="CreateDate" class="form-control" />
+            <span asp-validation-for="RiskDate" class="text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 mt-2">
+            <label asp-for="RiskDate" class="form-label"></label>
+            <input asp-for="RiskDate" class="form-control"/>
+            <span asp-validation-for="RiskDate" class="text-danger"></span>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-8">
+                <button class="btn btn-primary w-100" type="submit">
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
