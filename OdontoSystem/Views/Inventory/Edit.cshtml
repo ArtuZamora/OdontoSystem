@@ -1,0 +1,65 @@
+﻿@model BusinessLogic.Models.Inventory
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="col-lg-12">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h2>Administración de inventario | Editar</h2>
+            </div>
+            <div class="col d-flex justify-content-end align-items-end">
+                <a asp-action="index" class="btn btn-sm btn-primary">
+                    <strong>Regresar</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+<hr />
+<div class="d-flex align-item-center justify-content-center mt-3">
+    <div class="col-md-6">
+        <form asp-action="Edit" class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group col-12 mt-2">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 mt-2">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 mt-2">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-6 mt-2">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-12 col-md-6 mt-2">
+                <label asp-for="RiskDate" class="control-label"></label>
+                <input asp-for="RiskDate" class="form-control" />
+                <span asp-validation-for="RiskDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row justify-content-center mt-3">
+                    <div class="col-10 col-md-8">
+                        <input type="submit" value="Editar" class="btn btn-primary w-100" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

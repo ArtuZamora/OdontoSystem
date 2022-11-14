@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OdontoSystem.Areas.Identity.Data;
+using BusinessLogic.Models;
 
 namespace OdontoSystem.Data;
 
@@ -19,4 +20,6 @@ public class OdontoSystemContext : IdentityDbContext<OdontoSystemUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
+
+    public DbSet<BusinessLogic.Models.Inventory> Inventory { get; set; }
 }

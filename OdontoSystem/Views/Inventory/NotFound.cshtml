@@ -1,0 +1,16 @@
+﻿@model BusinessLogic.Models.Inventory
+
+@{
+    ViewData["Title"] = "Not found";
+}
+
+<div class="d-flex align-items-center justify-content-center flex-column">
+
+    <h2 class="display-2">Item no encontrado</h2>
+    <span class="display-1">
+        <i class="fas fa-exclamation-triangle"></i>
+    </span>
+    <button class="btn btn-lg btn-primary mt-4" onclick="location.href='@Url.Action("Index", "Inventory")'">
+        <strong>Regresar</strong>
+    </button>
+</div>
