@@ -192,25 +192,17 @@ namespace OdontoSystem.Controllers
             }
         }
 
-        // GET: AgendaController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(long id)
         {
-            return View();
-        }
-
-        // POST: AgendaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            var resultFlag = false;
+            var result = await _paciente.DeleteAsync(id);
+            if (result)
             {
-                return RedirectToAction(nameof(Index));
+                resultFlag = true;
             }
-            catch
-            {
-                return View();
-            }
+            TempData["ResultFlag"] = resultFlag;
+            return RedirectToAction("Index");
         }
     }
 }
