@@ -1,5 +1,5 @@
-﻿@model IEnumerable<BusinessLogic.Models.Agenda>
-@using OdontoSystem.Areas.Identity.Data
+﻿@using OdontoSystem.Areas.Identity.Data
+@model IEnumerable<OdontoSystemUser>
 
 @{
     ViewData["Title"] = "Lista";
@@ -42,7 +42,6 @@
                                 <th>DUI</th>
                                 <th>Dirección</th>
                                 <th>Nombre completo</th>
-                                <th>Especialidad</th>
                                 <th>Contacto</th>
                                 <th>Tipo de usuario</th>
                                 <th>Acciones</th>
@@ -53,9 +52,30 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Id)
+                                        @Html.DisplayFor(modelItem => item.Email)
                                     </td>
                                     <td>
+                                        @item.DUI
+                                    </td>
+                                    <td>
+                                        @item.Address
+                                    </td>
+                                    <td>
+                                        @item.Name @item.LastName
+                                    </td>
+                                    <td>
+                                        @item.Telephone
+                                    </td>
+                                    <td>
+                                        @item.Speciality
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success mx-2 editOpt" data-toggle="tooltip" data-placement="top" title="Editar" data-id="@item.Id">
+                                            <i class="fa fa-pen-to-square"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-danger deleteOpt" data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="@item.Id">
+                                            <i class="fa fa-xmark"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             }
@@ -69,5 +89,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Agenda/script.js" asp-append-version="true"></script>
+    <script src="~/js/User/script.js" asp-append-version="true"></script>
 }

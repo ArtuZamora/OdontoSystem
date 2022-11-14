@@ -36,10 +36,14 @@
             <li class="@Html.IsSelected(controller: "Agenda", action: "Index")">
                 <a asp-controller="Agenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda</span></a>
             </li>
-
-
+            <li class="@Html.IsSelected(controller: "Treatment", action: "Index")">
+                <a asp-controller="Treatment" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Tratamiento</span></a>
+            </li>
             @if (actualUser.Speciality == "Doctor")
             {
+                <li class="@Html.IsSelected(controller: "User", action: "Index")">
+                    <a asp-controller="User" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Usuarios</span></a>
+                </li>
                 <li class="@Html.IsSelected(controller: "AttendAgenda", action: "Index")">
                     <a asp-controller="AttendAgenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda de hoy</span></a>
                 </li>
