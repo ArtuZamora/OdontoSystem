@@ -12,6 +12,7 @@ namespace OdontoSystem.Controllers
 {
     public class PacienteViewModel
     {
+        public long Id { get; set; }
         [Required(ErrorMessage = "El campo es requerido")]
         [MaxLength(50)]
         [Display(Name = "Tipo de paciente")]
@@ -172,19 +173,57 @@ namespace OdontoSystem.Controllers
         }
 
         // GET: AgendaController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(long id)
         {
-            return View();
+            var paciente = await _paciente.DetailsAsync(id);
+            if (paciente != null)
+            {
+                var pacienteObj = new PacienteViewModel
+                {
+                    Id = paciente.Id,
+                    FirstName = paciente.FirstName,
+                    MiddleName = paciente.MiddleName,
+                    LastName = paciente.LastName,
+                    Address = paciente.Address,
+                    Age = paciente.Age,
+                    BirthDate = paciente.BirthDate,
+                    CellPhone = paciente.CellPhone,
+                    CreateDate = paciente.CreateDate,
+                    email = paciente.email,
+                    TypeName = paciente.TypeName
+                };
+                return View(pacienteObj);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: AgendaController/Edit/5
+        // POST: TreatmentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(PacienteViewModel paciente)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    await _paciente.UpdateAsync(new Patient
+                    {
+                        Id = (long)paciente.Id,
+                        FirstName = paciente.FirstName,
+                        MiddleName = paciente.MiddleName,
+                        LastName = paciente.LastName,
+                        Address = paciente.Address,
+                        Age = paciente.Age,
+                        BirthDate = paciente.BirthDate,
+                        CellPhone = paciente.CellPhone,
+                        CreateDate = paciente.CreateDate,
+                        email = paciente.email,
+                        TypeName = paciente.TypeName
+                    });
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return View();
             }
             catch
             {
