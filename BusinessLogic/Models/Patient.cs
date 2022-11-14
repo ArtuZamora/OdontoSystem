@@ -66,7 +66,7 @@ namespace BusinessLogic.Models
         public string? CellPhone  { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
-        [RegularExpression(@"^\\S+@\\S+\\.\\S+$", ErrorMessage = "Digita un email válido.")]
+        [EmailAddress(ErrorMessage ="Ingrese un correo electrónico válido")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string? email { get; set; }

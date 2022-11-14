@@ -48,7 +48,9 @@
                     <a asp-controller="AttendAgenda" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Agenda de hoy</span></a>
                 </li>
             }
-
+            <li class="@Html.IsSelected(controller: "Paciente", action: "Index")">
+                <a asp-controller="paciente" asp-action="Index" class="text-decoration-none"><i class="fa fa-list"></i> <span class="nav-label">Pacientes</span></a>
+            </li>
         </ul>
     </div>
 </nav>
