@@ -60,7 +60,7 @@
                             <div class="form-group col-8">
                                 <div class="d-flex justify-content-between">
                                     <label asp-for="PatientId" class="control-label"></label>
-                                    <a asp-controller="Patient" asp-action="Edit" asp-route-id="@patient.Id" class="btn btn-sm btn-info mb-1" target="_blank">Ver info</a>
+                                    <a asp-controller="Paciente" asp-action="Edit" asp-route-id="@patient.Id" class="btn btn-sm btn-info mb-1" target="_blank">Ver info</a>
                                 </div>
                                 <input class="form-control" value="@patient.FirstName @patient.LastName" readonly />
                                 <span asp-validation-for="PatientId" class="text-danger"></span>
