@@ -2,17 +2,17 @@
 var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
 
 $(document).ready(function () {
-    $('.cancelOpt').on('click', function () {
+    $('.deleteOpt').on('click', function () {
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: '¿Está seguro de querer cancelar la cita?',
+            title: '¿Está seguro de eliminar el usuario?',
             showDenyButton: true,
             confirmButtonText: `Sí`,
             denyButtonText: `No`,
             icon: 'info'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = baseUrl + `Agenda/Cancelar/?id=` + id;
+                window.location.href = baseUrl + `User/Delete/?id=` + id;
             }
         });
     });

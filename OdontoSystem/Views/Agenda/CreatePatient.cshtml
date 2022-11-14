@@ -8,7 +8,7 @@
 <h1>Crear nuevo paciente</h1>
 
 <hr />
-<form asp-action="Create" asp-controller="Paciente" id="createTemporalPatientFrm">
+<form asp-action="CreateElsewhere" asp-controller="Paciente" id="createTemporalPatientFrm">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="FirstName" class="control-label"></label>
@@ -26,9 +26,34 @@
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="form-group mt-2">
+        <label asp-for="TypeName" class="control-label"></label>
+        <input asp-for="TypeName" class="form-control" />
+        <span asp-validation-for="TypeName" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="BirthDate" class="control-label"></label>
+        <input asp-for="BirthDate" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="Age" class="control-label"></label>
+        <input asp-for="Age" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
         <label asp-for="CellPhone" class="control-label"></label>
         <input asp-for="CellPhone" class="form-control" />
         <span asp-validation-for="CellPhone" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-2">
+        <label asp-for="email" class="control-label"></label>
+        <input asp-for="email" class="form-control" />
+        <span asp-validation-for="email" class="text-danger"></span>
     </div>
     <div class="form-group mt-3 d-flex justify-content-center">
         <input type="submit" value="Crear" class="btn btn-primary" />
