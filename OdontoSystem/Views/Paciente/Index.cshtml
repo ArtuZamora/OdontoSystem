@@ -27,7 +27,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Lista de citas </h5>
+                    <h5>Lista de pacientes </h5>
                     <div class="ibox-tools">
                         @*<a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -75,12 +75,15 @@
                                         @Html.Raw(item.email)
                                     </td>
                                     <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success mx-2 editOpt" data-toggle="tooltip" data-placement="top" title="Editar" data-id="@item.Id">
-                                                <i class="fa fa-pen-to-square"></i>
-                                            </a>
-                                            <button class="btn btn-sm btn-danger cancelOpt" data-toggle="tooltip" data-placement="top" title="Cancelar" data-id="@item.Id">
-                                                <i class="fa fa-xmark"></i>
-                                            </button>
+                                        <a asp-action="Create" asp-controller="AttendAgenda" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-info mx-2 editOpt" data-toggle="tooltip" data-placement="top" title="Historia clínica" data-id="@item.Id">
+                                            <i class="fa fa-file-medical"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success mx-2 editOpt" data-toggle="tooltip" data-placement="top" title="Editar" data-id="@item.Id">
+                                            <i class="fa fa-pen-to-square"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-danger cancelOpt" data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="@item.Id">
+                                            <i class="fa fa-xmark"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             }
