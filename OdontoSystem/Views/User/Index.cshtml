@@ -56,55 +56,6 @@
                                         @Html.DisplayFor(modelItem => item.Id)
                                     </td>
                                     <td>
-                                        @Html.Raw(string.Concat(item.Patient.FirstName, " ", item.Patient.MiddleName, " ", item.Patient.LastName))
-                                    </td>
-                                    <td>
-                                        @if(!string.IsNullOrEmpty(item.DoctorId))
-                                        {
-                                            var user = users.FirstOrDefault(u => u.Id == item.DoctorId);
-                                            if (user != default)
-                                            {
-                                                @Html.Raw(string.Concat(user.Name, " ", user.LastName))
-                                            }
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.Raw(item.Date.ToString("dd/MM/yyyy"))
-                                    </td>
-                                    <td>
-                                        @Html.Raw(item.Hour.ToString("hh:mm tt"))
-                                    </td>
-                                    <td>
-                                        @if (item.Treatment != null)
-                                        {
-                                            @Html.DisplayFor(modelItem => item.Treatment.Name)
-                                        }
-                                    </td>
-                                    <td>
-                                        @{
-                                            var css = "";
-                                            switch (item.State)
-                                            {
-                                                case "Agendada":
-                                                    css = "primary";
-                                                    break;
-                                                case "Cancelada":
-                                                    css = "danger";
-                                                    break;
-                                            }
-                                        }
-                                        <span class="badge badge-@css">@item.State</span>
-                                    </td>
-                                    <td>
-                                        @if (item.State == "Agendada")
-                                        {
-                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success mx-2 editOpt" data-toggle="tooltip" data-placement="top" title="Editar" data-id="@item.Id">
-                                                <i class="fa fa-pen-to-square"></i>
-                                            </a>
-                                            <button class="btn btn-sm btn-danger cancelOpt" data-toggle="tooltip" data-placement="top" title="Cancelar" data-id="@item.Id">
-                                                <i class="fa fa-xmark"></i>
-                                            </button>
-                                        }
                                     </td>
                                 </tr>
                             }
