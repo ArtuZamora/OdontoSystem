@@ -1,0 +1,106 @@
+﻿@model OdontoSystem.Controllers.PacienteViewModel
+@using OdontoSystem.Areas.Identity.Data
+@using OdontoSystem.Controllers
+@using BusinessLogic.Models
+
+@{
+    ViewData["Title"] = "Crear";
+    var pacientes = (IEnumerable<Patient>)ViewData["Pacientes"];
+    var users = (IEnumerable<OdontoSystemUser>)ViewData["Usuarios"];
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <div class="row d-flex justify-content-between">
+            <div class="col">
+                <h2>Crear Paciente</h2>
+            </div>
+            <div class="col d-flex justify-content-end align-items-end">
+                <a asp-action="Index" class="btn btn-sm btn-primary" id="createOpt">
+                    <strong>Regresar</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Creación de Paciente</h5>
+                    <div class="ibox-tools">
+                        @*<a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                        </a>*@
+                    </div>
+                </div>
+                <div class="ibox-content table-responsive">
+                    <form asp-action="Create" method="post" id="citafrm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-4 mt-2">
+                                <label asp-for="FirstName" class="control-label"></label>
+                                <input asp-for="FirstName" class="form-control mt-3" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="MiddleName" class="control-label"></label>
+                                <input asp-for="MiddleName" class="form-control mt-3" />
+                                <span asp-validation-for="MiddleName" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="LastName" class="control-label"></label>
+                                <input asp-for="LastName" class="form-control mt-3" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="TypeName" class="control-label"></label>
+                                <input asp-for="TypeName" class="form-control mt-3" />
+                                <span asp-validation-for="TypeName" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="BirthDate" class="control-label"></label>
+                                <input asp-for="BirthDate" class="form-control mt-3" />
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="Age" class="control-label"></label>
+                                <input asp-for="Age" class="form-control mt-3" />
+                                <span asp-val mt-2idation-for="Age" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="Address" class="control-label"></label>
+                                <input asp-for="Address" class="form-control mt-3" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="CellPhone" class="control-label"></label>
+                                <input asp-for="CellPhone" class="form-control mt-3" />
+                                <span asp-validation-for="CellPhone" class="text-danger"></span>
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label asp-for="email" class="control-label"></label>
+                                <input asp-for="email" class="form-control mt-3" />
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-12 d-flex justify-content-center mt-4"><input type="submit" class="btn btn-primary" value="Crear Perfil del paciente" /></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/Paciente/script.js" asp-append-version="true"></script>
+    }
