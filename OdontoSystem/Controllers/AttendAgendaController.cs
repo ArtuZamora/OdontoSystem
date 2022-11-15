@@ -242,7 +242,9 @@ namespace OdontoSystem.Controllers
                         var agenda = await _agenda.DetailsAsync((long)record.AgendaId);
                         if (agenda != null)
                         {
-                            var treatment = await _treatment.DetailsAsync(Convert.ToInt64(record.CurrentMedicTx));
+                            Treatment treatment = null;
+                            if(!string.IsNullOrEmpty(record.CurrentMedicTx))
+                                treatment = await _treatment.DetailsAsync(Convert.ToInt64(record.CurrentMedicTx));
                             agenda.State = "Finalizada";
                             if (treatment != null)
                                 agenda.Treatment = treatment;
