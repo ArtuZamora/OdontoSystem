@@ -97,7 +97,7 @@
                                     <td>
                                         @if (item.State == "Agendada")
                                         {
-                                            <a asp-action="Create" asp-route-id="@item.Id" asp-route-agendaId="@item.Id" target="_blank" class="btn btn-sm btn-success mx-2" data-toggle="tooltip" data-placement="top" title="Atender" data-id="@item.Id">
+                                            <a asp-action="Create" asp-route-id="@item.Patient.Id" asp-route-agendaId="@item.Id" target="_blank" class="btn btn-sm btn-success mx-2" data-toggle="tooltip" data-placement="top" title="Atender" data-id="@item.Id">
                                                 <i class="fa fa-user-doctor"></i>
                                             </a>
                                         }
